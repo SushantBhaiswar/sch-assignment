@@ -1,0 +1,146 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "PR Management & Summarization API",
+    "version": "1.0.0",
+    "description": "Unified API for Node.js PR Management and Python AI Summarization"
+  },
+  "servers": [
+    { "url": "/", "description": "API Gateway" }
+  ],
+  "components": {
+    "securitySchemes": {
+      "userAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-user-id",
+        "description": "User ID for authentication"
+      },
+      "roleAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-role",
+        "description": "User role for authorization"
+      }
+    }
+  },
+
+  "paths": {
+    "/api/pr/processPR": {
+      "post": {
+        "summary": "Process a Purchase Requisition (Node.js)",
+        "tags": ["Node.js API"],
+        "security": [
+          {
+            "userAuth": [],
+            "roleAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["totalAmount", "deliveryDate", "requester", "department"],
+                "properties": {
+                  "totalAmount": { "type": "number", "description": "Total amount of the PR" },
+                  "deliveryDate": { "type": "string", "format": "date", "description": "Delivery date (YYYY-MM-DD)" },
+                  "requester": { "type": "string", "format": "email", "description": "Requester email" },
+                  "department": { "type": "string", "description": "Department name" },
+                  "items": { "type": "array", "items": { "type": "object" }, "description": "PR items" },
+                  "priority": { "type": "string", "description": "Priority" }
+                }
+              },
+              "example": {
+                "totalAmount": 1000,
+                "deliveryDate": "2025-07-15",
+                "requester": "user@example.com",
+                "department": "IT",
+                "items": [{"name": "item1", "quantity": 2, "unitPrice": 500}],
+                "priority": "High"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Processed PR" },
+          "400": { "description": "Validation error" },
+          "401": { "description": "Missing user information in headers" },
+          "403": { "description": "Unauthorized access" }
+        }
+      }
+    },
+    "/api/pr/getPRs": {
+      "get": {
+        "summary": "Get PRs (Node.js)",
+        "tags": ["Node.js API"],
+        "security": [
+          {
+            "userAuth": [],
+            "roleAuth": []
+          }
+        ],
+        "parameters": [
+          { "name": "plant", "in": "query", "schema": { "type": "string" }, "required": true, "description": "Plant name" },
+          { "name": "status", "in": "query", "schema": { "type": "string" }, "required": false },
+          { "name": "department", "in": "query", "schema": { "type": "string" }, "required": false }
+        ],
+        "responses": {
+          "200": { "description": "List of PRs" },
+          "400": { "description": "Validation error" },
+          "401": { "description": "Missing user information in headers" },
+          "403": { "description": "Unauthorized access" }
+        }
+      }
+    },
+     "/api/summarize/": {
+      "post": {
+        "summary": "Summarize PR text (Python)",
+        "tags": ["Python API"],
+        "description": "Summarize a long PR description using AI",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["text"],
+                "properties": {
+                  "text": { 
+                    "type": "string", 
+                    "description": "Text to summarize", 
+                    "minLength": 10,
+                    "example": "This is a long purchase requisition text that needs to be summarized by the AI service."
+                  }
+                }
+              },
+              "example": {
+                "description": "This is a long purchase requisition text that needs to be summarized by the AI service."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { 
+            "description": "Summary generated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "summary": { "type": "string" },
+                    "original_length": { "type": "integer" },
+                    "summary_length": { "type": "integer" }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Invalid input" },
+          "500": { "description": "Server error" }
+        }
+      }
+    }
+  }
+} 

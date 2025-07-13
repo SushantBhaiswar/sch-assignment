@@ -1,0 +1,10 @@
+[
+  { "id": "PR1", "plant": "PlantA", "amount": 45000, "requester": "john.doe@company.com", "department": "IT", "status": "Pending", "createdAt": "2024-01-15T10:00:00.000Z" },
+  { "id": "PR2", "plant": "PlantC", "amount": 60000, "requester": "jane.smith@company.com", "department": "HR", "status": "Approved", "createdAt": "2024-01-14T15:30:00.000Z" },
+  { "id": "PR3", "plant": "PlantB", "amount": 30000, "requester": "mike.wilson@company.com", "department": "Finance", "status": "Pending", "createdAt": "2024-01-13T09:15:00.000Z" },
+  { "id": "PR4", "plant": "PlantA", "amount": 75000, "requester": "sarah.jones@company.com", "department": "Operations", "status": "Rejected", "createdAt": "2024-01-12T14:20:00.000Z" },
+  { "id": "PR5", "plant": "PlantB", "amount": 25000, "requester": "david.brown@company.com", "department": "Marketing", "status": "Approved", "createdAt": "2024-01-11T11:45:00.000Z" },
+  { "id": "PR6", "plant": "PlantC", "amount": 85000, "requester": "lisa.garcia@company.com", "department": "Sales", "status": "Pending", "createdAt": "2024-01-10T16:30:00.000Z" },
+  { "id": "PR7", "plant": "PlantA", "amount": 35000, "requester": "tom.lee@company.com", "department": "Engineering", "status": "Approved", "createdAt": "2024-01-09T13:10:00.000Z" },
+  { "id": "PR8", "plant": "PlantB", "amount": 55000, "requester": "emma.davis@company.com", "department": "Legal", "status": "Pending", "createdAt": "2024-01-08T08:55:00.000Z" }
+] 

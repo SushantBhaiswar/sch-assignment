@@ -1,0 +1,38 @@
+# Node.js
+nodejs/node_modules/
+nodejs/.env
+npm-debug.log*
+
+# Python
+python/venv/
+python/.venv/
+python/app/__pycache__/
+*.pyc
+python/.env
+
+# General
+.env
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+*.tmp
+*.cache
+
+# Build/coverage
+/dist/
+/build/
+/coverage/
+
+# OS
+.Spotlight-V100
+.Trashes
+
+# Docker Compose override files
+/docker-compose.override.yml
+
+# Other
+*.bak
+*.swp
+*~ 

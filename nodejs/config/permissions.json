@@ -1,0 +1,18 @@
+{
+  "buyer": {
+    "allowedPlants": ["PlantA", "PlantB"],
+    "maxAmount": 50000
+  },
+  "manager": {
+    "allowedPlants": ["PlantA", "PlantB", "PlantC"],
+    "maxAmount": 100000
+  },
+  "admin": {
+    "allowedPlants": ["PlantA", "PlantB", "PlantC", "PlantD"],
+    "maxAmount": 999999
+  },
+  "viewer": {
+    "allowedPlants": ["PlantA"],
+    "maxAmount": 25000
+  }
+} 

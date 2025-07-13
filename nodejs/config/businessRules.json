@@ -1,0 +1,29 @@
+{
+  "approvalRules": [
+    {
+      "condition": "totalAmount < 10000",
+      "action": "autoApprove",
+      "setStatus": "Approved"
+    },
+    {
+      "condition": "deliveryDays < 3",
+      "action": "setUrgency",
+      "urgency": "High"
+    },
+    {
+      "condition": "deliveryDays < 7",
+      "action": "setUrgency",
+      "urgency": "Medium"
+    },
+    {
+      "condition": "totalAmount > 50000",
+      "action": "setUrgency",
+      "urgency": "High"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "created": "2024-01-15T10:00:00.000Z",
+    "description": "Business rules for PR processing - auto-approve if value < 10,000; set urgency based on delivery date"
+  }
+} 

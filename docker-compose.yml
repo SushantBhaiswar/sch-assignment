@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # Node.js PR API
+  nodejs-api:
+    build:
+      context: ./nodejs
+      dockerfile: Dockerfile
+    ports:
+      - "${NODE_PORT}:${NODE_PORT}"
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - PORT=${NODE_PORT}
+      - REDIS_URL=${REDIS_URL}
+    depends_on:
+      - redis
+    volumes:
+      - ./nodejs:/app
+      - /app/node_modules
+    networks:
+      - app-network
+
+  # Python PR Summarizer API
+  python-api:
+    build:
+      context: ./python
+      dockerfile: Dockerfile
+    ports:
+      - "${FLASK_PORT}:${FLASK_PORT}"
+    environment:
+      - FLASK_ENV=${FLASK_ENV}
+      - FLASK_APP=${FLASK_APP}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - ./python:/app
+    networks:
+      - app-network
+
+  # Redis for caching
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    volumes:
+      - redis-data:/data
+    networks:
+      - app-network
+
+  # Nginx reverse proxy for unified access
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/swagger-ui:/usr/share/nginx/html
+    depends_on:
+      - nodejs-api
+      - python-api
+    networks:
+      - app-network
+
+volumes:
+  redis-data:
+
+networks:
+  app-network:
+    driver: bridge 
