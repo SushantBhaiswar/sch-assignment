@@ -83,8 +83,7 @@
         ],
         "parameters": [
           { "name": "plant", "in": "query", "schema": { "type": "string" }, "required": true, "description": "Plant name" },
-          { "name": "status", "in": "query", "schema": { "type": "string" }, "required": false },
-          { "name": "department", "in": "query", "schema": { "type": "string" }, "required": false }
+          { "name": "maxAmount", "in": "query", "schema": { "type": "number" }, "required": false }
         ],
         "responses": {
           "200": { "description": "List of PRs" },
