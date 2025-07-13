@@ -70,7 +70,6 @@ class AppBootstrap {
             }
         } catch (error) {
             logger.error('Failed to connect to Redis:', error);
-            // Continue without Redis - cache operations will be skipped
         }
     }
 
